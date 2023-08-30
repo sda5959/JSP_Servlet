@@ -1,0 +1,71 @@
+public String getDate()
+	{ 
+		// 현재 서버 시간 가져오기
+		String SQL = "select sysdate from dual"; // 현재 시간을 가져오는 SQL문
+		try
+		{
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(SQL);	//실행결과 가져오기
+			if (rs.next())
+			{
+				return rs.getString(1);	//현재 날짜 반환
+			}
+
+		} catch (Exception e)
+		{
+			e.printStackTrace();	//오류 발생
+			System.out.println("시간가져오기 오류");
+		}
+		return "";	//데이터베이스 오류
+	}
+
+create table bbs (
+    boardID number,
+    bbsID number,
+    bbsTitle varchar2(50),
+    userID varchar2(20),
+    bbsDate Date ,
+    bbsContent varchar2(2048),
+    bbsAvailable number
+    );
+create table user1 (
+    userID varchar2(20),
+    userPassword varchar2(20),
+    userName varchar2(20),
+    userGender varchar2(20),
+    userPhoneNumber varchar2(30),
+    userEmail varchar2(50),
+    userPostcode number(10),
+    userAddress varchar2(30),
+    userDetailAddress varchar2(30),
+    userExtraAddress varchar2(50)
+    );
+    commit;
+create table comment1 (
+    boardID number,
+    commentID number,
+    bbsID number,
+    userID varchar2(20),
+    commentDate varchar2(50),
+    commentText varchar2(100),
+    commentAvailable number
+    );
+create table evaluation (
+    bbsID number,
+    userID varchar2(20),
+    good number,
+    soso number,
+    bad number
+    );
+create table heart(
+    bbsID number,
+    userID varchar2(20)
+    );
+    commit;
+drop table bbs;
+
+CREATE TABLE BBS_FILE(
+FILENAME VARCHAR(20),
+FILEREALNAME VARCHAR(20),
+BBSID NUMBER);
+commit;
